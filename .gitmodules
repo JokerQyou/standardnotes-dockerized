@@ -1,0 +1,6 @@
+[submodule "ruby-server"]
+	path = ruby-server
+	url = https://github.com/standardfile/ruby-server.git
+[submodule "build/ruby-server"]
+	path = build/ruby-server
+	url = https://github.com/standardfile/ruby-server.git
