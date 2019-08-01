@@ -1,3 +1,5 @@
+# vi:syntax=dockerfile
+
 FROM node:8-stretch-slim as bower_builder
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get -y update && \
