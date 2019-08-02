@@ -2,22 +2,15 @@ version: '2'
 
 services:
   app:
-    image: mcores/standardnote-app
-    depends_on:
-      - db
-    env_file: .env
-    links:
-      - db
+    image: mcores/standardnote-go
     ports:
-      - "3000:3000"
-
-  db:
-    image: mariadb:10
-    env_file: .env
+      - "3000:9000"
     volumes:
-      # - db_data:/var/lib/mysql
-      - ./db:/var/lib/mysql
+      - ./data:/data
 
-# volumes:
-#   db_data:
+  web:
+    image: mcores/standardnote-web
+    command: -r
+    ports:
+      - "5000:5000"
 
