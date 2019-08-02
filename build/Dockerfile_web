@@ -1,3 +1,4 @@
+# vi:syntax=dockerfile
 FROM node:8-stretch-slim as builder
 WORKDIR /
 RUN npm install --save standard-notes-web && \
