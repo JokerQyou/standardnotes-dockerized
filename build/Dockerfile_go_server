@@ -1,0 +1,14 @@
+# vi:syntax=dockerfile
+FROM golang:stretch as go_builder
+WORKDIR /
+RUN CGO_ENABLED=0 GOOS=linux \
+    git clone --branch v0.4.4 --depth 1 https://github.com/tectiv3/standardfile.git && \
+    cd standardfile && \
+    go build -a -ldflags '-extldflags "-static"' . && \
+    mkdir /data
+
+FROM scratch
+COPY --from=go_builder /standardfile/standardfile /standardfile
+COPY --from=go_builder /data /data
+ENTRYPOINT [ "/standardfile" ]
+CMD [ "-foreground", "-port", "9000", "-db", "/data/sf.db", "-cors" ]
