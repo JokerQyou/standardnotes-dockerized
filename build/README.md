@@ -6,10 +6,10 @@ It also link the production log to stdout of the running container, so it can be
 
 # Build instruction
 
-To build the sync server:
+To build the official sync server (written in Ruby):
 
 ```shell
-cp Dockerfile_server ruby-server/
+cp Dockerfile_ruby_server ruby-server/Dockerfile
 cd ruby-server
 docker build -t mcores/standardnote-app .
 ```
@@ -17,6 +17,7 @@ docker build -t mcores/standardnote-app .
 To build the web app:
 
 ```shell
+cp Dockerfile_web Dockerfile
 docker build -t mcores/standardnote-web .
 ```
 
