@@ -1,6 +1,8 @@
 # What's different
 
-This deployment stack uses MariaDB which is compatible with MySQL 5.7 auth plugin, so you don't have to pin to the legacy version of MySQL.
+This deployment stack uses the golang implementation of sync server instead of the official Ruby server.
+This results in significantly smaller image size and better performance.
+The golang server uses SQLite database which is a single file, and is much easier to self host for personal use.
 
 # Caution
 
@@ -10,14 +12,10 @@ Please do not use it in production (yet).
 # Deployment instruction
 
 ```shell
-# Edit .env accordingly (ref to official guide here: https://docs.standardnotes.org/self-hosting/self-hosting-with-docker)
-
 # Start the stack
 docker-compose up -d
 
-# Once the database is ready, run a one-time database init task:
-docker-compose exec app bundle exec rake db:create db:migrate
-
-# All done. Now go to https://app.standardnotes.org/ and fill in http://127.0.0.1:3000 to use your own server
+# All done. Now go to http://127.0.0.1:5000/ and fill in http://127.0.0.1:3000/api to use your own server.
+# You can also go to the official web app site at https://app.standardnotes.org/ .
 ```
 
