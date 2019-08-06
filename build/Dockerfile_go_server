@@ -16,4 +16,4 @@ ENV FOREGROUND=true
 ENV PORT=9000
 ENV DB=/data/sf.db
 ENTRYPOINT [ "/standardfile" ]
-CMD [ "-c", "env", "-v"]
+CMD [ "-c", "env" ]
