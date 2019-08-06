@@ -18,7 +18,7 @@ To build [the golang sync server][go_server]:
 
 ```shell
 cp Dockerfile_go_server Dockerfile
-docker build -t mcores/standardnote-go .
+docker build -t mcores/standardfile-go .
 ```
 
 To build [the web app][web_app]:
