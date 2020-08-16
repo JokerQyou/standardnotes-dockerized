@@ -1,7 +1,8 @@
 # vi:syntax=dockerfile
-FROM node:lts-slim as builder
+FROM node:lts as builder
+ARG VERSION=3.3.1
 WORKDIR /
-RUN npm install --save git+https://github.com/standardnotes/web.git#3.3.1 && \
+RUN npm install --save "git+https://github.com/standardnotes/web.git#${VERSION}" && \
     cd /node_modules/standard-notes-web && \
     rm -rf README.md LICENSE package.json docker Dockerfile log && \
     cd public/extensions && \
@@ -11,15 +12,7 @@ RUN npm install --save git+https://github.com/standardnotes/web.git#3.3.1 && \
                     -o -name ".*" \
                     -o -name "webpack.config.js" \
                     -o -name "yarn.lock" \
-                    -o -name "*.map" \) | xargs rm && \
-    cd / && \
-    wget https://github.com/weihanglo/sfz/releases/download/0.1.1/sfz-0.1.1-x86_64-unknown-linux-musl.tar.gz -O sfz.tar.gz && \
-    tar xf sfz.tar.gz && \
-    rm sfz.tar.gz
+                    -o -name "*.map" \) | xargs rm
 
-FROM scratch
-WORKDIR /
-COPY --from=builder /node_modules/standard-notes-web/ /
-COPY --from=builder /sfz /
-
-ENTRYPOINT [ "/sfz" ]
+FROM nginx:alpine
+COPY --from=builder /node_modules/standard-notes-web/ /usr/share/nginx/html
