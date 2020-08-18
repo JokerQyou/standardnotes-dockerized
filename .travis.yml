@@ -1,0 +1,12 @@
+services:
+  - docker
+
+script:
+  - docker build -f Dockerfile_go_server -t "${DOCKER_USERNAME}/standardfile-go" .
+  - docker build -f Dockerfile_web -t "${DOCKER_USERNAME}/standardnote-web" .
+
+after_success:
+  - echo "$DOCKER_TOKEN" | docker login -u $DOCKER_USERNAME --password-stdin
+  - docker push "${DOCKER_USERNAME}/standardfile-go"
+  - docker push "${DOCKER_USERNAME}/standardnote-web"
+  - docker logout 
