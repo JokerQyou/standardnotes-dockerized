@@ -1,5 +1,7 @@
 # standardnotes-dockerized
 
+![TravisCI build status](https://travis-ci.com/JokerQyou/standardnotes-dockerized.svg?branch=master)
+
 Self-host your own Standard Notes instance.
 
 # Notice
